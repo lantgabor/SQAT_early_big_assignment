@@ -16,10 +16,10 @@ class PageBase {
     protected WebDriver driver;
     protected WebDriverWait wait;
     
-    
+    private By body = By.tagName("body");
     public PageBase(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
+        this.wait = new WebDriverWait(driver, 100);
     }
     
     protected WebElement waitAndReturnElement(By locator) {
@@ -28,7 +28,7 @@ class PageBase {
     } 
     
     public String getBodyText() {
-        WebElement bodyElement = this.waitAndReturnElement(By.tagName("body"));
+        WebElement bodyElement = this.waitAndReturnElement(body);
         return bodyElement.getText();
     }
    

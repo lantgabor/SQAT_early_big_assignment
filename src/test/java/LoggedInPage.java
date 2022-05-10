@@ -12,12 +12,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 
-class SearchResultPage extends PageBase {
+class LoggedInPage extends PageBase {
 
-    private By searchField = By.xpath("/html[1]/body[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]");
-    private By searchBtn = By.xpath("/html[1]/body[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/button[2]/span[2]");
+    private By userFace = By.xpath("//span[@class='user-face']");
+    private By logout = By.xpath("/html[1]/body[1]/header[1]/nav[1]/div[1]/ul[1]/li[5]/div[1]/a[13]");
 
-    public SearchResultPage(WebDriver driver) {
+    private By searchField = By.xpath("/html[1]/body[1]/main[1]/div[1]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]");
+    private By searchBtn = By.xpath("/html[1]/body[1]/main[1]/div[1]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/button[2]/span[2]");
+
+    public LoggedInPage(WebDriver driver) {
         super(driver);
     }
 
@@ -28,5 +31,12 @@ class SearchResultPage extends PageBase {
         this.waitAndReturnElement(searchBtn).click();
    
         return new SearchResultPage(this.driver);
+    }
+
+    public MainPage logout() {
+        this.waitAndReturnElement(userFace).click();
+        this.waitAndReturnElement(logout).click();
+
+        return new MainPage(this.driver);
     }
 }

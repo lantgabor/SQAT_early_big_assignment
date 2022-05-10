@@ -34,10 +34,23 @@ public class FirstSeleniumTest {
         MainPage mainPage = new MainPage(this.driver);
         SearchResultPage searchResultPage = mainPage.search("valami");
         String bodyText = searchResultPage.getBodyText();
-        System.out.print(bodyText);
-        Assert.assertTrue(bodyText.contains("A"));
+        Assert.assertTrue(bodyText.contains("erre"));
     }
 
+    @Test
+    public void loginLogout() {
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.openLogin(); 
+        LoggedInPage loggedInPage = loginPage.login("jorej74107@dmosoft.com", "3t4MFJxn");
+
+        MainPage mainPage2 = loggedInPage.logout();
+
+
+        LoginPage loginPage2 = mainPage2.openLogin(); 
+
+        Assert.assertTrue(loginPage2.getBodyText().contains("Keress"));
+    }
+    
     @After
     public void close() {
         if (driver != null) {
